@@ -5,7 +5,7 @@ export const HeaderContainer = styled.header`
   align-items: center;
   justify-content: space-between;
 
-  height: 104px;
+  padding: 32px 0;
 `
 
 export const MenuContainer = styled.nav`
