@@ -1,9 +1,11 @@
 import { styled } from 'styled-components'
 
 export const LayoutContainer = styled.div`
-  max-width: 80rem;
-  padding: 0 2.5rem;
-
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  padding: 0 5.5rem;
+
+  div {
+    max-width: 1120px;
+  }
 `
