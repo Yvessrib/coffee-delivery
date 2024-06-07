@@ -31,7 +31,7 @@ import { useContext } from 'react'
 import coffeeData from '../../coffee.json'
 
 export function Checkout() {
-  const { cart } = useContext(CartContext)
+  const { cart, removeItem } = useContext(CartContext)
 
   const coffeesInCart = cart.map((item) => {
     const coffeeInfo = coffeeData.find((coffee) => coffee.id === item.id)
@@ -45,6 +45,10 @@ export function Checkout() {
       quantity: item.quantity,
     }
   })
+
+  function HandleRemoveItem(ItemId: string) {
+    removeItem(ItemId)
+  }
 
   return (
     <CheckoutContainer>
@@ -103,7 +107,7 @@ export function Checkout() {
           <CoffeeList>
             {coffeesInCart.map((coffee) => (
               <>
-                <Coffee>
+                <Coffee key={coffee.id}>
                   <div>
                     <img src={coffee.image} alt="" />
 
@@ -111,7 +115,7 @@ export function Checkout() {
                       <span>{coffee.title}</span>
 
                       <CoffeInfo>
-                        <button>
+                        <button onClick={() => HandleRemoveItem(coffee.id)}>
                           <Trash size={16} />
                           <span>REMOVER</span>
                         </button>
