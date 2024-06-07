@@ -24,6 +24,7 @@ import {
 } from './styles'
 import { QuantityInput } from '../../components/QuantityInput'
 import CoffImg from '../../assets/Image.png'
+import { Link } from 'react-router-dom'
 
 export function Checkout() {
   return (
@@ -141,9 +142,11 @@ export function Checkout() {
               <span>R$ 33,20</span>
             </div>
           </PriceContainer>
-          <CheckoutButton>
-            <span>CONFIRMAR PEDIDO</span>
-          </CheckoutButton>
+          <Link to="/checkout/success">
+            <CheckoutButton>
+              <span>CONFIRMAR PEDIDO</span>
+            </CheckoutButton>
+          </Link>
         </div>
       </CartContainer>
     </CheckoutContainer>
