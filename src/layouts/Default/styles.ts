@@ -7,5 +7,6 @@ export const LayoutContainer = styled.div`
 
   div {
     max-width: 1120px;
+    width: 100%;
   }
 `

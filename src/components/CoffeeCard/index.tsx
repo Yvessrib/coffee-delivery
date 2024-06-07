@@ -1,4 +1,4 @@
-import { Minus, Plus, ShoppingCart } from 'phosphor-react'
+import { ShoppingCart } from 'phosphor-react'
 import coffeImg from '../../assets/Image.png'
 
 import {
@@ -9,9 +9,9 @@ import {
   Description,
   Details,
   Price,
-  QuantityInput,
   Order,
 } from './styles'
+import { QuantityInput } from '../QuantityInput'
 
 export function CoffeeCard() {
   return (
@@ -35,17 +35,7 @@ export function CoffeeCard() {
         </Price>
 
         <Order>
-          <QuantityInput>
-            <button>
-              <Minus size={14} />
-            </button>
-
-            <span>1</span>
-
-            <button>
-              <Plus size={14} />
-            </button>
-          </QuantityInput>
+          <QuantityInput />
 
           <button>
             <ShoppingCart size={22} weight="fill" color="#fff" />

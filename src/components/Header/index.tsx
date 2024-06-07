@@ -6,6 +6,7 @@ import {
   LocationButton,
   MenuContainer,
 } from './styles'
+import { Link } from 'react-router-dom'
 export function Header() {
   return (
     <HeaderContainer>
@@ -16,9 +17,11 @@ export function Header() {
           <MapPin size={22} weight="fill" />
           <p>Porto Alegre, RS</p>
         </LocationButton>
-        <CartButton>
-          <ShoppingCart size={22} weight="fill" />
-        </CartButton>
+        <Link to="/checkout">
+          <CartButton>
+            <ShoppingCart size={22} weight="fill" />
+          </CartButton>
+        </Link>
       </MenuContainer>
     </HeaderContainer>
   )
