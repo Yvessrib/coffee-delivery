@@ -12,6 +12,7 @@ import Icon1 from '../../assets/icons/Icon-1.png'
 import Icon2 from '../../assets/icons/Icon-2.png'
 import Icon3 from '../../assets/icons/Icon-3.png'
 import { CoffeeCard } from '../../components/CoffeeCard'
+import coffeeData from '../../coffee.json'
 
 export function Home() {
   return (
@@ -62,14 +63,9 @@ export function Home() {
         <h1>Nossos cafés</h1>
 
         <div>
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
+          {coffeeData.map((coffee) => (
+            <CoffeeCard key={coffee.id} coffee={coffee} />
+          ))}
         </div>
       </CoffeeList>
     </>
