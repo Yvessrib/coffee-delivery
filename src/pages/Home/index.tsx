@@ -27,15 +27,13 @@ export function Home() {
           </HeroHead>
           <HeroPros>
             <div>
-              <div>
-                {/* <ShoppingCart
+              {/* <ShoppingCart
                 size={16}
                 weight="fill"
                 color="#C47F17"
                 style={{ backgroundColor: '#F1E9C9' }}
               /> */}
-                <img src={Icon} alt="" />
-              </div>
+              <img src={Icon} alt="" />
               <p>Compra simples e segura</p>
             </div>
 
