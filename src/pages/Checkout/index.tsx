@@ -6,6 +6,7 @@ import {
   Money,
   Trash,
 } from 'phosphor-react'
+
 import {
   AdressContainer,
   AdressForm,
@@ -22,11 +23,29 @@ import {
   CheckoutButton,
   CoffeInfo,
 } from './styles'
-import { QuantityInput } from '../../components/QuantityInput'
-import CoffImg from '../../assets/Image.png'
+
+// import { QuantityInput } from '../../components/QuantityInput'
 import { Link } from 'react-router-dom'
+import { CartContext } from '../../contexts/CartContext'
+import { useContext } from 'react'
+import coffeeData from '../../coffee.json'
 
 export function Checkout() {
+  const { cart } = useContext(CartContext)
+
+  const coffeesInCart = cart.map((item) => {
+    const coffeeInfo = coffeeData.find((coffee) => coffee.id === item.id)
+
+    if (!coffeeInfo) {
+      throw new Error('Coffee not found')
+    }
+
+    return {
+      ...coffeeInfo,
+      quantity: item.quantity,
+    }
+  })
+
   return (
     <CheckoutContainer>
       <InfoContainer>
@@ -82,50 +101,30 @@ export function Checkout() {
         <h1>Cafés selecionados</h1>
         <div>
           <CoffeeList>
-            <Coffee>
-              <div>
-                <img src={CoffImg} alt="" />
+            {coffeesInCart.map((coffee) => (
+              <>
+                <Coffee>
+                  <div>
+                    <img src={coffee.image} alt="" />
 
-                <div>
-                  <span>Expresso Tradicional</span>
+                    <div>
+                      <span>{coffee.title}</span>
 
-                  <CoffeInfo>
-                    <QuantityInput />
-
-                    <button>
-                      <Trash size={16} />
-                      <span>REMOVER</span>
-                    </button>
-                  </CoffeInfo>
-                </div>
-              </div>
-              <div className="price">
-                <span>R$ 9,90</span>
-              </div>
-            </Coffee>
-            <Divider />
-            <Coffee>
-              <div>
-                <img src={CoffImg} alt="" />
-
-                <div>
-                  <span>Expresso Tradicional</span>
-
-                  <CoffeInfo>
-                    <QuantityInput />
-
-                    <button>
-                      <Trash size={16} />
-                      <span>REMOVER</span>
-                    </button>
-                  </CoffeInfo>
-                </div>
-              </div>
-              <div className="price">
-                <span>R$ 9,90</span>
-              </div>
-            </Coffee>
-            <Divider />
+                      <CoffeInfo>
+                        <button>
+                          <Trash size={16} />
+                          <span>REMOVER</span>
+                        </button>
+                      </CoffeInfo>
+                    </div>
+                  </div>
+                  <div className="price">
+                    <span>{coffee.price}</span>
+                  </div>
+                </Coffee>
+                <Divider />
+              </>
+            ))}
           </CoffeeList>
 
           <PriceContainer>
