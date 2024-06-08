@@ -1,14 +1,19 @@
 import { createContext, useEffect, useReducer, ReactNode } from 'react'
 import { Item, CartReducer, Order } from '../reducers/cart/reducer'
-import { addItemAction, removeItemAction } from '../reducers/cart/action'
+import {
+  addItemAction,
+  decrementItemQuantityAction,
+  incrementItemQuantityAction,
+  removeItemAction,
+} from '../reducers/cart/action'
 
 interface CartContextType {
   cart: Item[]
   orders: Order[]
   addItem: (data: Item) => void
   removeItem: (itemId: Item['id']) => void
-  // decrementItemQuantity: (itemId: Item['id']) => void;
-  // incrementItemQuantity: (itemId: Item['id']) => void;
+  decrementItemQuantity: (itemId: Item['id']) => void
+  incrementItemQuantity: (itemId: Item['id']) => void
   // checkout: (order: OrderInfo) => void;
 }
 
@@ -48,13 +53,29 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     dispatch(removeItemAction(itemId))
   }
 
+  function decrementItemQuantity(itemId: Item['id']) {
+    dispatch(decrementItemQuantityAction(itemId))
+  }
+
+  function incrementItemQuantity(itemId: Item['id']) {
+    dispatch(incrementItemQuantityAction(itemId))
+  }
+
   useEffect(() => {
     const stateJSON = JSON.stringify(cartState)
     localStorage.setItem('@coffee-delivery:cart-state-1.0.0', stateJSON)
   }, [cartState])
 
   return (
-    <CartContext.Provider value={{ ...cartState, addItem, removeItem }}>
+    <CartContext.Provider
+      value={{
+        ...cartState,
+        addItem,
+        removeItem,
+        decrementItemQuantity,
+        incrementItemQuantity,
+      }}
+    >
       {children}
     </CartContext.Provider>
   )
