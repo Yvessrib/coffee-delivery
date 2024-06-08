@@ -29,9 +29,11 @@ import { Link } from 'react-router-dom'
 import { CartContext } from '../../contexts/CartContext'
 import { useContext } from 'react'
 import coffeeData from '../../coffee.json'
+import { QuantityInput } from '../../components/QuantityInput'
 
 export function Checkout() {
-  const { cart, removeItem } = useContext(CartContext)
+  const { cart, removeItem, decrementItemQuantity, incrementItemQuantity } =
+    useContext(CartContext)
 
   const coffeesInCart = cart.map((item) => {
     const coffeeInfo = coffeeData.find((coffee) => coffee.id === item.id)
@@ -48,6 +50,14 @@ export function Checkout() {
 
   function HandleRemoveItem(ItemId: string) {
     removeItem(ItemId)
+  }
+
+  function HandleIncrementItemQuantity(ItemId: string) {
+    incrementItemQuantity(ItemId)
+  }
+
+  function HandleDecrementItemQuantity(ItemId: string) {
+    decrementItemQuantity(ItemId)
   }
 
   return (
@@ -115,6 +125,15 @@ export function Checkout() {
                       <span>{coffee.title}</span>
 
                       <CoffeInfo>
+                        <QuantityInput
+                          decrementQuantity={() =>
+                            HandleDecrementItemQuantity(coffee.id)
+                          }
+                          incrementQuantity={() =>
+                            HandleIncrementItemQuantity(coffee.id)
+                          }
+                          quantity={coffee.quantity}
+                        />
                         <button onClick={() => HandleRemoveItem(coffee.id)}>
                           <Trash size={16} />
                           <span>REMOVER</span>
