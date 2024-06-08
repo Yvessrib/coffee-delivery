@@ -142,7 +142,7 @@ export function Checkout() {
                     </div>
                   </div>
                   <div className="price">
-                    <span>{coffee.price}</span>
+                    <span>R$ {coffee.price}</span>
                   </div>
                 </Coffee>
                 <Divider />
