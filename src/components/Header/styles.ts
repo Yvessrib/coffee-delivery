@@ -1,4 +1,5 @@
 import { styled } from 'styled-components'
+import { texts } from '../../styles/texts'
 
 export const HeaderContainer = styled.header`
   display: flex;
@@ -51,5 +52,22 @@ export const CartButton = styled.button`
   &:hover {
     background: ${(props) => props.theme['yellow-dark']};
     color: ${(props) => props.theme['yellow-light']};
+  }
+
+  span {
+    ${texts.fonts.textS}
+    font-weight: bold;
+    color: ${(props) => props.theme.white};
+    background-color: ${(props) => props.theme['yellow-dark']};
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    top: 30px;
+    right: 85px;
   }
 `

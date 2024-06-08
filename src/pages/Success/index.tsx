@@ -10,8 +10,26 @@ import icon1 from '../../assets/icons/Icon-1.png'
 import icon2 from '../../assets/icons/Icon-4.png'
 import icon3 from '../../assets/icons/Icon-5.png'
 import successImg from '../../assets/success_img.svg'
+import { CartContext } from '../../contexts/CartContext'
+import { useContext } from 'react'
+import { useParams } from 'react-router-dom'
 
 export function Success() {
+  const { orders } = useContext(CartContext)
+  const { orderId } = useParams()
+  const orderInfo = orders.find((order) => order.id === Number(orderId))
+  const paymentMethod = {
+    credit: 'Cartão de Crédito',
+    debit: 'Cartão de Débito',
+    cash: 'Dinheiro',
+  }
+
+  if (!orderInfo?.id) {
+    return null
+  }
+
+  console.log(paymentMethod)
+
   return (
     <SuccessContainer>
       <SuccessHeading>
@@ -24,9 +42,14 @@ export function Success() {
             <img src={icon2} alt="" />
             <div>
               <span>
-                Entrega em <b>Rua João Daniel Martinelli, 102</b>
+                Entrega em{' '}
+                <b>
+                  {orderInfo.street}, {orderInfo.number}
+                </b>
               </span>
-              <span>Farrapos - Porto Alegre, RS</span>
+              <span>
+                {orderInfo.neighborhood} - {orderInfo.city}, {orderInfo.state}
+              </span>
             </div>
           </DetailsCard>
 
@@ -45,7 +68,7 @@ export function Success() {
             <div>
               <span>Pagamento na entrega</span>
               <span>
-                <b>Cartão de Crédito</b>
+                <b>{paymentMethod[orderInfo.paymentMethod]}</b>
               </span>
             </div>
           </DetailsCard>

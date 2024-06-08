@@ -7,7 +7,11 @@ import {
   MenuContainer,
 } from './styles'
 import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import { CartContext } from '../../contexts/CartContext'
 export function Header() {
+  const { cart } = useContext(CartContext)
+
   return (
     <HeaderContainer>
       <Link to="/">
@@ -19,9 +23,10 @@ export function Header() {
           <MapPin size={22} weight="fill" />
           <p>Porto Alegre, RS</p>
         </LocationButton>
-        <Link to="/checkout">
+        <Link to="/checkout" aria-disabled={cart.length === 0}>
           <CartButton>
             <ShoppingCart size={22} weight="fill" />
+            {cart.length > 0 ? <span>{cart.length}</span> : null}
           </CartButton>
         </Link>
       </MenuContainer>
