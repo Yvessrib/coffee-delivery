@@ -10,7 +10,9 @@ import { Link } from 'react-router-dom'
 export function Header() {
   return (
     <HeaderContainer>
-      <img src={CoffeLogo} alt="" />
+      <Link to="/">
+        <img src={CoffeLogo} alt="" />
+      </Link>
 
       <MenuContainer>
         <LocationButton>

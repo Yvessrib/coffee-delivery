@@ -25,8 +25,7 @@ export const Tags = styled.div`
   display: flex;
   margin-top: 12px;
   gap: 4px;
-  align-self: center;
-  align-items: center;
+  justify-content: center;
 
   span {
     ${texts.fonts.tag}

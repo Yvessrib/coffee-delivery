@@ -26,6 +26,13 @@ export const LocationButton = styled.button`
 
   border: 0;
   border-radius: 6px;
+
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: ${(props) => props.theme['purple-dark']};
+    color: ${(props) => props.theme['purple-light']};
+  }
 `
 
 export const CartButton = styled.button`
@@ -38,4 +45,11 @@ export const CartButton = styled.button`
 
   border: 0;
   border-radius: 6px;
+
+  transition: all 0.2s;
+
+  &:hover {
+    background: ${(props) => props.theme['yellow-dark']};
+    color: ${(props) => props.theme['yellow-light']};
+  }
 `
