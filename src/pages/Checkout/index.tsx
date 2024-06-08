@@ -48,8 +48,21 @@ export function Checkout() {
     }
   })
 
+  const shippingPrice = 3.5
+
+  const totalItemPrice = coffeesInCart.reduce(
+    (previousValue: number, currentItem) => {
+      return (previousValue += currentItem.price * currentItem.quantity)
+    },
+    0,
+  )
+
   function HandleRemoveItem(ItemId: string) {
-    removeItem(ItemId)
+    if (cart.length === 1) {
+      alert('O carrinho precisa ter ao menos um item!')
+    } else {
+      removeItem(ItemId)
+    }
   }
 
   function HandleIncrementItemQuantity(ItemId: string) {
@@ -153,15 +166,30 @@ export function Checkout() {
           <PriceContainer>
             <div>
               <span>Total de Itens</span>
-              <span>R$ 3,50</span>
+              <span>
+                {new Intl.NumberFormat('pt-br', {
+                  currency: 'BRL',
+                  style: 'currency',
+                }).format(totalItemPrice)}
+              </span>
             </div>
             <div>
               <span>Entrega</span>
-              <span>R$ 3,50</span>
+              <span>
+                {new Intl.NumberFormat('pt-br', {
+                  currency: 'BRL',
+                  style: 'currency',
+                }).format(shippingPrice)}
+              </span>
             </div>
             <div>
               <span>Total</span>
-              <span>R$ 33,20</span>
+              <span>
+                {new Intl.NumberFormat('pt-br', {
+                  currency: 'BRL',
+                  style: 'currency',
+                }).format(totalItemPrice + shippingPrice)}
+              </span>
             </div>
           </PriceContainer>
           <Link to="/checkout/success">
