@@ -1,3 +1,4 @@
+import { NewOrderFormData } from '../../pages/Checkout'
 import { ActionTypes } from './action'
 import { produce } from 'immer'
 
@@ -6,7 +7,7 @@ export interface Item {
   quantity: number
 }
 
-export interface Order {
+export interface Order extends NewOrderFormData {
   id: number
   items: Item[]
 }
@@ -53,6 +54,20 @@ export function CartReducer(state: CartState, action: any) {
           itemToDecrement.quantity += 1
         }
       })
+
+    case ActionTypes.CHECKOUT_ORDER:
+      return produce(state, (draft) => {
+        const newOrder = {
+          id: new Date().getTime(),
+          items: state.cart,
+          ...action.payload.order,
+        }
+        draft.orders.push(newOrder)
+        draft.cart = []
+
+        action.payload.callback(`/checkout/${newOrder.id}/success`)
+      })
+
     default:
       return state
   }
