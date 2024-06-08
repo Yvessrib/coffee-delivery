@@ -2,28 +2,30 @@ import { styled } from 'styled-components'
 import { texts } from '../../styles/texts'
 
 export const CheckoutContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  padding: 2rem 0;
-  grid-column-gap: 32px;
+  display: flex;
+  gap: 32px;
+  padding: 40px 20px;
 `
 
 export const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  grid-column: span 3;
 
   > h1 {
     ${texts.fonts.titleXS}
   }
 `
 const BaseContainer = styled.div`
+  padding: 40px;
+  border-radius: 6px;
+  background-color: ${(props) => props.theme['base-card']};
+  width: 100%;
+  min-width: 640px;
+
   display: flex;
   flex-direction: column;
-  padding: 40px;
-  background: ${(props) => props.theme['base-card']};
-  border-radius: 6px;
+  gap: 32px;
 `
 
 export const AdressContainer = styled(BaseContainer)``
@@ -56,44 +58,13 @@ export const Heading = styled.div`
 
 export const AdressForm = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-column-gap: 10px;
-  grid-row-gap: 16px;
-
-  input {
-    padding: 12px;
-    background: ${(props) => props.theme['base-input']};
-    border-radius: 6px;
-    border: 0;
-  }
-
-  input:nth-child(1) {
-    grid-column: span 2;
-  }
-
-  input:nth-child(2) {
-    grid-column: span 6;
-  }
-
-  input:nth-child(3) {
-    grid-column: span 2;
-  }
-
-  input:nth-child(4) {
-    grid-column: span 4;
-  }
-
-  input:nth-child(5) {
-    grid-column: span 2;
-  }
-
-  input:nth-child(6) {
-    grid-column: span 3;
-  }
-
-  input:nth-child(7) {
-    grid-column: span 1;
-  }
+  grid-template-areas:
+    'cep . .'
+    'street street street'
+    'number fullAddress fullAddress'
+    'neighborhood city state';
+  grid-template-columns: 200px 1fr 60px;
+  grid-gap: 16px 12px;
 `
 
 export const PaymentContainer = styled(BaseContainer)``
@@ -101,40 +72,16 @@ export const PaymentContainer = styled(BaseContainer)``
 export const PaymentOptions = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 8px;
 
-  button {
-    ${texts.fonts.buttonS}
-    text-transform: uppercase;
+  > div {
     display: flex;
     align-items: center;
-    gap: 16px;
-    border-radius: 6px;
-
-    padding: 12px;
-    flex: 1;
-
-    border: 0;
-    background: ${(props) => props.theme['base-button']};
-
-    svg {
-      margin-top: -2px;
-      color: ${(props) => props.theme.purple};
-    }
-
-    transition: all 0.2s;
-
-    &:hover {
-      background: ${(props) => props.theme['base-hover']};
-    }
-
-    &:focus {
-      box-shadow: 0 0 0 1px ${(props) => props.theme.purple};
-    }
+    justify-content: space-between;
+    gap: 12px;
   }
 `
 export const CartContainer = styled.div`
-  grid-column: span 2;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -157,7 +104,7 @@ export const CoffeeList = styled.div`
 
 export const Coffee = styled.div`
   display: flex;
-  gap: 35px;
+  gap: 20px;
   border-radius: 6px 20px;
 
   img {
