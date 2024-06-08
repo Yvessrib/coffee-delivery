@@ -18,6 +18,7 @@ interface CartState {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function CartReducer(state: CartState, action: any) {
+  console.log(state)
   switch (action.type) {
     case ActionTypes.ADD_ITEM:
       return produce(state, (draft) => {
@@ -29,6 +30,28 @@ export function CartReducer(state: CartState, action: any) {
         draft.cart = draft.cart.filter(
           (item) => item.id !== action.payload.itemId,
         )
+      })
+
+    case ActionTypes.DECREMENT_ITEM_QUANTITY:
+      return produce(state, (draft) => {
+        const itemToDecrement = draft.cart.find(
+          (item) => item.id === action.payload.itemId,
+        )
+
+        if (itemToDecrement?.id && itemToDecrement.quantity > 1) {
+          itemToDecrement.quantity -= 1
+        }
+      })
+
+    case ActionTypes.INCREMENT_ITEM_QUANTITY:
+      return produce(state, (draft) => {
+        const itemToDecrement = draft.cart.find(
+          (item) => item.id === action.payload.itemId,
+        )
+
+        if (itemToDecrement?.id) {
+          itemToDecrement.quantity += 1
+        }
       })
     default:
       return state

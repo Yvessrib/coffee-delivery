@@ -2,9 +2,10 @@ import { styled } from 'styled-components'
 
 export const QuantityInputContainer = styled.div`
   display: flex;
-  gap: 2px;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 0px;
 
-  padding: 6p 8px;
   background-color: ${(props) => props.theme['base-button']};
   border-radius: 6px;
 
@@ -13,6 +14,7 @@ export const QuantityInputContainer = styled.div`
     display: flex;
     align-items: center;
     border: 0;
+    padding: 5px;
   }
 
   button svg {
@@ -26,7 +28,7 @@ export const QuantityInputContainer = styled.div`
   }
 
   span {
-    padding-top: 7px;
+    padding-top: 2px;
     color: ${(props) => props.theme['base-title']};
   }
 `
