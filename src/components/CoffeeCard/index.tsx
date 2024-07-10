@@ -27,7 +27,6 @@ interface CoffeeCardProps {
 
 export function CoffeeCard({ coffee }: CoffeeCardProps) {
   const [quantity, setQuantity] = useState(1)
-  const [isItemAdded, setIsItemAdded] = useState(false)
   const { addItem } = useContext(CartContext)
 
   function incrementQuantity() {
@@ -45,7 +44,6 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
       id: coffee.id,
       quantity,
     })
-    setIsItemAdded(true)
     setQuantity(1)
   }
 
